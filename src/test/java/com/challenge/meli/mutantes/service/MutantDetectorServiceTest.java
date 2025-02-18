@@ -20,34 +20,34 @@ public class MutantDetectorServiceTest {
 
     @Test
     public void testIsMutant_WhenDnaIsMutant_ReturnsTrue() {
-        // Arrange: Configura el escenario de prueba
+        //
         String[] dna = {"ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"};
 
-        // Act: Llama al método que estás probando
+        //
         boolean isMutant = mutantDetectorService.isMutant(dna);
 
-        // Assert: Verifica el resultado
+        //
         assertTrue(isMutant);
     }
 
     @Test
     public void testIsMutant_WhenDnaIsNotMutant_ReturnsFalse() {
-        // Arrange: Configura el escenario de prueba
+        //
         String[] dna = {"ATGCGA", "CAGTGC", "TTATTT", "AGACGG", "GCGTCA", "TCACTG"};
 
-        // Act: Llama al método que estás probando
+        //
         boolean isMutant = mutantDetectorService.isMutant(dna);
 
-        // Assert: Verifica el resultado
+        //
         assertFalse(isMutant);
     }
 
     @Test
     public void testIsMutant_WhenDnaIsInvalid_ThrowsException() {
-        // Arrange: Configura el escenario de prueba
+        //
         String[] dna = {"ATGCGA", "CAGTGC", "TTATXT", "AGACGG", "GCGTCA", "TCACTG"};  // ADN inválido
 
-        // Act y Assert: Verifica que se lance una excepción
+        //
         assertThrows(IllegalArgumentException.class, () -> {
             mutantDetectorService.isMutant(dna);
         });

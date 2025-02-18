@@ -86,11 +86,11 @@ public class MutantDetectorService {
     }
 
     public Map<String, Object> getStats() {
-        long countMutantDna = dnaRepository.countByIsMutant(true);  // Cuenta los ADN de mutantes
-        long countHumanDna = dnaRepository.countByIsMutant(false); // Cuenta los ADN de humanos
-        double ratio = (double) countMutantDna / (countMutantDna + countHumanDna);  // Calcula el ratio
+        long countMutantDna = dnaRepository.countByIsMutant(true);  //
+        long countHumanDna = dnaRepository.countByIsMutant(false); //
+        double ratio = (double) countMutantDna / (countMutantDna + countHumanDna);  //
 
-        // Devuelve un mapa con las estadísticas
+        //
         return Map.of(
                 "count_mutant_dna", countMutantDna,
                 "count_human_dna", countHumanDna,

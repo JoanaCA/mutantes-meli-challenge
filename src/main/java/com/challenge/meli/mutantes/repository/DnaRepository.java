@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
     @Repository
     public interface DnaRepository extends JpaRepository<DnaRecord,Long> {
-        boolean existsByDna(String dna);  // Verifica si un ADN ya existe en la base de datos
+        boolean existsByDna(String dna);  //
 
-        // Cuenta los ADN de mutantes o humanos
+        //
         long countByIsMutant(boolean isMutant);
     }
 
