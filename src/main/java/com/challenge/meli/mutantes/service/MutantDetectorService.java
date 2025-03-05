@@ -14,21 +14,42 @@ public class MutantDetectorService {
     private DnaRepository dnaRepository;
 
     public boolean isMutant(String[] dna){
-        String dnaString = String.join(",", dna);
 
-        //...analiza
-        if (dnaRepository.existsByDna(dnaString)){
+        // Validar que el ADN no sea nulo
+        if (dna == null) {
+            throw new IllegalArgumentException("El ADN no puede ser nulo");
+        }
+
+        // Validar que el ADN sea una matriz cuadrada
+        int n = dna.length;
+        for (String row : dna) {
+            if (row == null || row.length() != n) {
+                throw new IllegalArgumentException("El ADN debe ser una matriz cuadrada");
+            }
+        }
+
+        // Validar que el ADN solo contenga caracteres válidos (A, T, C, G)
+        for (String row : dna) {
+            for (char c : row.toCharArray()) {
+                if (c != 'A' && c != 'T' && c != 'C' && c != 'G') {
+                    throw new IllegalArgumentException("El ADN contiene caracteres inválidos: " + c);
+                }
+            }
+        }
+
+        // Verificar si el ADN ya ha sido analizado
+        String dnaString = String.join(",", dna);
+        if (dnaRepository.existsByDna(dnaString)) {
             throw new RuntimeException("DNA already checked");
         }
 
-        //...detecta..
+        // Detectar si el ADN es mutante
         boolean isMutant = checkMutantLogic(dna);
 
-        // guarda resultado bd...
+        // Guardar el resultado en la base de datos
         DnaRecord record = new DnaRecord();
         record.setDna(dnaString);
         record.setMutant(isMutant);
-
         dnaRepository.save(record);
 
         return isMutant;
